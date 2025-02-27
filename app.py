@@ -43,11 +43,11 @@ configurations = {
     "Windows i7": {'company': 'Lenovo', 'type': 'Ultrabook', 'ram': 16, 'weight': 1.8,
                    'touchscreen': 'No', 'ips': 'Yes', 'screen_size': 15.6,
                    'resolution': '2560x1440', 'cpu': 'Intel Core i7', 'hdd': 0,
-                   'ssd': 1024, 'gpu': 'NVIDIA', 'os': 'Windows'},
+                   'ssd': 1024, 'gpu': 'Nvidia', 'os': 'Windows'},
     
     "MacBook Air": {'company': 'Apple', 'type': 'Ultrabook', 'ram': 8, 'weight': 1.24,
                     'touchscreen': 'No', 'ips': 'Yes', 'screen_size': 13.3,
-                    'resolution': '2560x1600', 'cpu': 'Apple M1', 'hdd': 0,
+                    'resolution': '2560x1600', 'cpu': 'Intel Core i5', 'hdd': 0,
                     'ssd': 256, 'gpu': 'Apple', 'os': 'Mac'}
 }
 
