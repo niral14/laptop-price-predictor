@@ -12,21 +12,9 @@ with gzip.open('df.pkl.gz', 'rb') as f:
 
 st.title("Laptop Price Predictor")
 
-# Fixing GPU Brand Error
-if 'Gpu brand' in df.columns:
-    df = df.dropna(subset=['Gpu brand'])  # Remove NaN values
-    df['Gpu brand'] = df['Gpu brand'].astype(str).str.strip()
-    gpu_options = sorted(df['Gpu brand'].unique().tolist())  # Sorted for consistency
 
-    # Ensure necessary GPUs exist
-    for gpu in ["NVIDIA", "Intel", "Apple"]:
-        if gpu not in gpu_options:
-            gpu_options.append(gpu)
-else:
-    st.error("Error: 'Gpu brand' column not found in DataFrame.")
-    gpu_options = ["Unknown"]
 
-st.write("Available GPU Brands:", gpu_options)  # Debugging info
+#st.write("Available GPU Brands:", gpu_options)  # Debugging info
 
 # Laptop Configurations
 configurations = {
@@ -48,7 +36,7 @@ configurations = {
     "MacBook Air": {'company': 'Apple', 'type': 'Ultrabook', 'ram': 8, 'weight': 1.24,
                     'touchscreen': 'No', 'ips': 'Yes', 'screen_size': 13.3,
                     'resolution': '2560x1600', 'cpu': 'Intel Core i5', 'hdd': 0,
-                    'ssd': 256, 'gpu': 'Apple', 'os': 'Mac'}
+                    'ssd': 256, 'gpu': 'Intel', 'os': 'Mac'}
 }
 
 # Pre-fill inputs based on button click
