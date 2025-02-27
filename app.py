@@ -12,7 +12,16 @@ with gzip.open('df.pkl.gz', 'rb') as f:
 
 st.title("Laptop Price Predictor")
 
+# Fixing GPU Brand Error
+if 'Gpu brand' in df.columns:
+    df = df.dropna(subset=['Gpu brand'])  # Remove NaN values
+    df['Gpu brand'] = df['Gpu brand'].astype(str).str.strip()
+    gpu_options = sorted(df['Gpu brand'].unique().tolist())  # Sorted for consistency
 
+    
+else:
+    st.error("Error: 'Gpu brand' column not found in DataFrame.")
+    gpu_options = ["Unknown"]
 
 #st.write("Available GPU Brands:", gpu_options)  # Debugging info
 
