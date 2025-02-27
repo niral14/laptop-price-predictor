@@ -3,8 +3,8 @@ import pickle
 import numpy as np
 
 # Load the trained model and dataset
-pipe = pickle.load(open('pipe.pkl', 'rb'))
-df = pickle.load(open('df.pkl', 'rb'))
+pipe = pickle.load(open('pipe.pkl.gz', 'rb'))
+df = pickle.load(open('df.pkl.gz', 'rb'))
 
 st.title("Laptop Price Predictor")
 
