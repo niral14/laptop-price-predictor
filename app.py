@@ -1,10 +1,14 @@
 import streamlit as st
 import pickle
 import numpy as np
+import gzip
 
-# Load the trained model and dataset
-pipe = pickle.load(open('pipe.pkl.gz', 'rb'))
-df = pickle.load(open('df.pkl.gz', 'rb'))
+# Load the trained model and dataset correctly using gzip
+with gzip.open('pipe.pkl.gz', 'rb') as f:
+    pipe = pickle.load(f)
+
+with gzip.open('df.pkl.gz', 'rb') as f:
+    df = pickle.load(f)
 
 st.title("Laptop Price Predictor")
 
