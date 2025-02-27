@@ -12,22 +12,23 @@ with gzip.open('df.pkl.gz', 'rb') as f:
 
 st.title("Laptop Price Predictor")
 
-# Fixing CPU Brand Error
-if 'Cpu brand' in df.columns:
-    df = df.dropna(subset=['Cpu brand'])  # Remove NaN values
-    df['Cpu brand'] = df['Cpu brand'].astype(str).str.strip()
-    cpu_options = sorted(df['Cpu brand'].unique().tolist())  # Sorted for consistency
+# Fixing GPU Brand Error
+if 'Gpu brand' in df.columns:
+    df = df.dropna(subset=['Gpu brand'])  # Remove NaN values
+    df['Gpu brand'] = df['Gpu brand'].astype(str).str.strip()
+    gpu_options = sorted(df['Gpu brand'].unique().tolist())  # Sorted for consistency
 
-    # Ensure Apple M1 is included
-    if "Apple M1" not in cpu_options:
-        cpu_options.append("Apple M1")
+    # Ensure necessary GPUs exist
+    for gpu in ["NVIDIA", "Intel", "Apple"]:
+        if gpu not in gpu_options:
+            gpu_options.append(gpu)
 else:
-    st.error("Error: 'Cpu brand' column not found in DataFrame.")
-    cpu_options = ["Unknown"]
+    st.error("Error: 'Gpu brand' column not found in DataFrame.")
+    gpu_options = ["Unknown"]
 
-st.write("Available CPU Brands:", cpu_options)  # Debugging info
+st.write("Available GPU Brands:", gpu_options)  # Debugging info
 
-# Laptop Configurations (HDD values checked below)
+# Laptop Configurations
 configurations = {
     "Windows i3": {'company': 'Dell', 'type': 'Notebook', 'ram': 8, 'weight': 1.6,
                    'touchscreen': 'No', 'ips': 'Yes', 'screen_size': 14.0,
@@ -81,10 +82,10 @@ screen_size = st.slider('Screen size (in inches)', 10.0, 18.0, 13.0, key='screen
 resolution = st.selectbox('Screen Resolution', ['1920x1080', '1366x768', '1600x900',
                                                  '3840x2160', '3200x1800', '2880x1800',
                                                  '2560x1600', '2560x1440', '2304x1440'], key='resolution')
-cpu = st.selectbox('CPU', cpu_options, key='cpu')  # Fixed issue here
+cpu = st.selectbox('CPU', df['Cpu brand'].unique(), key='cpu')
 hdd = st.selectbox('HDD (in GB)', [0, 128, 256, 512, 1024, 2048], key='hdd')
 ssd = st.selectbox('SSD (in GB)', [0, 8, 128, 256, 512, 1024], key='ssd')
-gpu = st.selectbox('GPU', df['Gpu brand'].unique(), key='gpu')
+gpu = st.selectbox('GPU', gpu_options, key='gpu')  # Fixed issue here
 os = st.selectbox('OS', df['os'].unique(), key='os')
 
 # Predict Price Button
